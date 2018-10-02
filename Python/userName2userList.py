@@ -1,4 +1,5 @@
 import requests
+import json
 
 with open('userName.txt') as f:
     contents = f.readlines()
@@ -12,8 +13,6 @@ for (i, userName) in enumerate(userNameList):
     userIds.append(r.text)
 
 print("finished all request")
-f = open('userId.txt', 'w')
-for line in userIds:
-    f.writelines(str(line) + '\n')
-f.close()
+with open('userId.json', 'w') as fp:
+    json.dump(userIds, fp)
 print("Saved to userId.txt.")

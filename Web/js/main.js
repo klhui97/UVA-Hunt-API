@@ -13,16 +13,16 @@ new Vue({
             studentData: [
                 {
                     name: "Peter",
-                    11498: '11498'
+                    2493: '11498'
                 }
             ],
             questionList: []
         }
     },
     methods: {
-        appendHeader: function (key) {
+        appendHeader: function (pnubmer, key) {
             this.headers.push({
-                text: key,
+                text: pnubmer,
                 value: key,
                 sortable: false
             })
@@ -37,10 +37,25 @@ new Vue({
     },
     mounted() {
         var main = this
-        $.getJSON('questionDetails.json', json => {
+        $.getJSON('resource/questionDetails.json', json => {
             $.each(json, function (index, item) {
-                main.appendHeader(item.number)
+                main.appendHeader(item.number, item.pid)
                 main.questionList.push(item)
+            })
+        })
+
+        $.getJSON('resource/userId.json', json => {
+            $.each(json, function (index, item) {
+                $.getJSON('https://uhunt.onlinejudge.org/api/subs-user-last/' + item + '/10000', json => {
+                    dict = {}
+                    dict['name'] = json.name
+                    json.subs.forEach(s => {
+                        if (s[6] != -1) {
+                            dict[s[1]] = 'ok'
+                        }
+                    });
+                    main.studentData.push(dict)
+                })
             })
         })
     },
