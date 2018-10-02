@@ -8,30 +8,41 @@ new Vue({
                     align: 'left',
                     sortable: false,
                     value: 'name'
+                },
+                {
+                    text: 'Total',
+                    align: 'center',
+                    sortable: false,
+                    value: 'total'
                 }
             ],
             studentData: [
-                {
-                    name: "Peter",
-                    2493: '11498'
-                }
             ],
-            questionList: []
+            questionList: {}
         }
     },
     methods: {
-        appendHeader: function (pnubmer, key) {
+        appendHeader(pnubmer, key) {
             this.headers.push({
                 text: pnubmer,
                 value: key,
                 sortable: false
             })
         },
-        checkCompleted(value) {
-            if (!isNaN(value)) {
-                return "Ok"
+        tdContent(student, header) {
+            if (header.value == 'name') {
+                return '<div class="subheading text-xs-left">' + student.name + '</div>'
+            }else if (header.value == 'total') {
+                return '<div class="subheading text-xs-center">' + student.solvedQ.length + '</div>'
+            }else if (student[header.value]) {
+                return '<div class="blue white--text subheading text-xs-center">O</div>'
             }else {
-                return value
+                return '<div class="red white--text subheading text-xs-center">X</div>'
+            }
+        },
+        getProblemString: function (pid) {
+            if (this.questionList[pid]) {
+                return this.questionList[pid].number + ' ' + this.questionList[pid].title
             }
         }
     },
@@ -40,7 +51,10 @@ new Vue({
         $.getJSON('resource/questionDetails.json', json => {
             $.each(json, function (index, item) {
                 main.appendHeader(item.number, item.pid)
-                main.questionList.push(item)
+                main.questionList[item.pid] = {
+                    'title': item.title,
+                    'number': item.number
+                }
             })
         })
 
@@ -48,12 +62,19 @@ new Vue({
             $.each(json, function (index, item) {
                 $.getJSON('https://uhunt.onlinejudge.org/api/subs-user-last/' + item + '/10000', json => {
                     dict = {}
+                    solvedQ = []
                     dict['name'] = json.name
                     json.subs.forEach(s => {
                         if (s[6] != -1) {
-                            dict[s[1]] = 'ok'
+                            dict[s[1]] = 'O'
                         }
                     });
+                    for (var k in dict) {
+                        if (k != 'name') {
+                            solvedQ.push(k)
+                        }
+                    }
+                    dict['solvedQ'] = solvedQ
                     main.studentData.push(dict)
                 })
             })
