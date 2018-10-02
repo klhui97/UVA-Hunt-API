@@ -30,7 +30,12 @@
                     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
                     <template slot="items" slot-scope="props">
                         <td v-for="header in headers" class="pa-0">
-                            <div v-html="tdContent(props.item, header)"></div>
+                            <v-tooltip bottom>
+                                <span slot="activator" v-html="tdContent(props.item, header)">
+                                </span>
+                                <span v-html="tdContent(props.item, header, true)">
+                                </span>
+                            </v-tooltip>
                         </td>
                     </template>
                 </v-data-table>
