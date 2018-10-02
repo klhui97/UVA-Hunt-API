@@ -1,22 +1,23 @@
 new Vue({
     el: '#app',
-    data () {
-      return {
-        headers: [
-          {
-            text: 'Student',
-            align: 'left',
-            sortable: false,
-            value: 'name'
-          }
-        ],
-        studentData: [
-            {
-                name: "dsada",
-                1234: '1234'
-            }
-        ]
-      }
+    data() {
+        return {
+            headers: [
+                {
+                    text: 'Student',
+                    align: 'left',
+                    sortable: false,
+                    value: 'name'
+                }
+            ],
+            studentData: [
+                {
+                    name: "Peter",
+                    11498: '11498'
+                }
+            ],
+            questionList: []
+        }
     },
     methods: {
         appendHeader: function (key) {
@@ -25,16 +26,22 @@ new Vue({
                 value: key,
                 sortable: false
             })
+        },
+        checkCompleted(value) {
+            if (!isNaN(value)) {
+                return "Ok"
+            }else {
+                return value
+            }
         }
     },
     mounted() {
-        this.appendHeader(1234)
+        var main = this
         $.getJSON('questionDetails.json', json => {
-          this.products = json.data
-          console.log(json.data)
-          $.each(data, function (index, item) {
-              console.log(item)
-          })
+            $.each(json, function (index, item) {
+                main.appendHeader(item.number)
+                main.questionList.push(item)
+            })
         })
     },
-  })
+})

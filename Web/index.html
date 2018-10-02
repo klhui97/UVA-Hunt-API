@@ -14,7 +14,7 @@
 <body>
     <div id="app">
         <v-app>
-            <v-container grid-list-md text-xs-center>
+            <v-container grid-list-xs text-xs-center ma-2>
                 <!-- Table -->
                 <v-layout>
                     <v-flex xs12>
@@ -23,7 +23,7 @@
                             <template slot="items" slot-scope="props">
                                 <!-- <td class="text-xs-left">{{ props.item.name }}</td> -->
                                 <td v-for="header in headers">
-                                    {{ props.item[header.value] }}
+                                    {{ checkCompleted(props.item[header.value]) }}
                                 </td>
                             </template>
                         </v-data-table>
@@ -34,7 +34,7 @@
     </div>
 
     <script src="js/vue-resource@1.5.1"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
+    <script src="js/jquery.min.js"> </script>
     <script src="js/main.js"></script>
 </body>
 
