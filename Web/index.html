@@ -16,7 +16,7 @@
         <v-app>
             <!-- Table -->
             <div class="ma-2">
-                <v-data-table :headers="headers" :items="studentData" :loading="true" class="elevation-1">
+                <v-data-table :headers="headers" :items="studentData" :loading="true" class="elevation-1" :pagination.sync="pagination">
                     <template slot="headerCell" slot-scope="props">
                         <v-tooltip bottom>
                             <span slot="activator">

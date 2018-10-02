@@ -24,7 +24,8 @@ new Vue({
             ],
             studentData: [
             ],
-            questionList: {}
+            questionList: {},
+            pagination: {}
         }
     },
     methods: {
@@ -71,6 +72,7 @@ new Vue({
         }
     },
     mounted() {
+        this.pagination.rowsPerPage = -1
         var main = this
         $.getJSON('resource/questionDetails.json', json => {
             $.each(json, function (index, item) {
