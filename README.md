@@ -22,6 +22,6 @@ Path - Web/resource/questionDetails.json<br />
 Program - Python/problemNumber2detail.py<br />
 Required file - pNumberList.txt (each line one problem number)
 ```
-$ python userName2userList.py
+$ python problemNumber2detail.py
 ```
 questionDetails.json will be created
