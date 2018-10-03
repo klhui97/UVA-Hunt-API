@@ -61,6 +61,11 @@ new Vue({
                             return '<div>Total submission: ' + (extra.fail + extra.success) + '<br />Success: ' + extra.success + '<br />Fail: ' + extra.fail + '</div>'
                         }
                         return '<div class="blue white--text subheading text-xs-center">O</div>'
+                    }else if (extra && extra.success == 0) {
+                        if (isTips) {
+                            return '<div>Total submission: ' + (extra.fail + extra.success) + '<br />Success: ' + extra.success + '<br />Fail: ' + extra.fail + '</div>'
+                        }
+                        return '<div class="green white--text subheading text-xs-center">X</div>'
                     }else {
                         if (isTips) {
                             return '<div>No submission</div>'
