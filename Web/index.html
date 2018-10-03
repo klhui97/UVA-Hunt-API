@@ -16,24 +16,24 @@
         <v-app>
             <!-- Table -->
             <div class="ma-2">
-                <v-data-table :headers="headers" :items="studentData" :loading="true" class="elevation-1" :pagination.sync="pagination">
-                    <template slot="headerCell" slot-scope="props">
-                        <v-tooltip bottom>
+                <v-data-table :headers="headers" :items="questionCols" :loading="true" class="elevation-1" :pagination.sync="pagination">
+                    <!-- <template slot="headerCell" slot-scope="props"> -->
+                        <!-- <v-tooltip bottom>
                             <span slot="activator">
                                 {{ props.header.text }}
                             </span>
                             <span>
                                 {{ getProblemString(props.header.value) }}
                             </span>
-                        </v-tooltip>
-                    </template>
+                        </v-tooltip> -->
+                    <!-- </template> -->
                     <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
                     <template slot="items" slot-scope="props">
                         <td v-for="header in headers" class="pa-0">
                             <v-tooltip bottom>
-                                <span slot="activator" v-html="tdContent(props.item, header)">
+                                <span slot="activator" v-html="tdContent(props.item, header.value)">
                                 </span>
-                                <span v-html="tdContent(props.item, header, true)">
+                                <span v-html="tdContent(props.item, header.value, true)">
                                 </span>
                             </v-tooltip>
                         </td>
