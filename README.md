@@ -19,8 +19,8 @@ $ python userName2userList.py
 userId.json will be created
 #### Question List
 Path - Web/resource/questionDetails.json
-Program - Python/userName2userList.py
-Required file - pNumberList.txt (each line one username)
+Program - Python/problemNumber2detail.py
+Required file - pNumberList.txt (each line one problem number)
 ```
 $ python userName2userList.py
 ```
