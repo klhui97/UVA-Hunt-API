@@ -3,7 +3,9 @@
 ### Function
 - Serverless
 - Track a group of users' submission on UVA
-- Track specific question
+- Track specific problem (the problem number is displayed in blue)
+- Track other problem (the problem number is displayed in red)
+
 #### Demo
 ```
 Support two version:
@@ -14,11 +16,12 @@ Version 1 (headers = uva name) - Web/index2.html && Web/js/main.js
 Old version:
 Version 2 (headers = question) - Web/index.html && Web/js/main2.js
 ```
-### Update target user/question list
+### Using Python to help you generate target user/question list
 #### User List
 Path - Web/resource/userId.json<br />
 Program - Python/userName2userList.py<br />
 Required file - userName.txt (each line one username)
+
 ```
 $ python userName2userList.py
 ```
@@ -27,6 +30,7 @@ userId.json will be created
 Path - Web/resource/questionDetails.json<br />
 Program - Python/problemNumber2detail.py<br />
 Required file - pNumberList.txt (each line one problem number)
+
 ```
 $ python problemNumber2detail.py
 ```
