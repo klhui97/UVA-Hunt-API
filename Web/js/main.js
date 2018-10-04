@@ -75,6 +75,15 @@ new Vue({
                 }
 
             }
+        },
+        compare: function (a, b) {
+            if (this.studentData[a].totalSolvedQ > this.studentData[b].totalSolvedQ) {
+                return -1
+            }else if (this.studentData[a].totalSolvedQ < this.studentData[b].totalSolvedQ) {
+                return 1
+            }else {
+                return this.studentData[a].solvedQ < this.studentData[b].solvedQ
+            }
         }
     },
     mounted() {
@@ -95,11 +104,12 @@ new Vue({
             })
         }).then(x => {
             callback = 0;
+            nameList = []
             extraPidList = {}
             $.getJSON('resource/userId.json', userIdJson => {
                 $.each(userIdJson, function (index, item) {
                     $.getJSON('https://uhunt.onlinejudge.org/api/subs-user-last/' + item + '/10000', json => {
-                        main.appendHeader(json.uname)
+                        nameList.push(json.uname)
                         dict = {}
                         extra = {}
                         solvedQ = 0
@@ -169,6 +179,10 @@ new Vue({
                     }).then( result => {
                         callback++;
                         if (callback == userIdJson.length) {
+                            nameList.sort(main.compare)
+                            for (var i = 0; i < nameList.length; i++) {
+                                main.appendHeader(nameList[i])
+                            }
                             for (x in extraPidList) {
                                 $.getJSON('https://uhunt.onlinejudge.org/api/p/id/' + x, json => {
                                     main.questionCols.push(json.num)
