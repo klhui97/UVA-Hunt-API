@@ -102,7 +102,7 @@ new Vue({
                     'number': item.number
                 }
             })
-        }).then(x => {
+        }).then(function() {
             callback = 0;
             nameList = []
             extraPidList = {}
@@ -175,8 +175,8 @@ new Vue({
                         dict['solvedQ'] = solvedQ
                         dict['totalSolvedQ'] = totalSolvedQ
                         main.studentData[json.uname] = dict
-                    }).catch( e=> {
-                    }).then( result => {
+                    }).catch(function() {
+                    }).then( function() {
                         callback++;
                         if (callback == userIdJson.length) {
                             nameList.sort(main.compare)
