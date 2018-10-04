@@ -5,6 +5,7 @@
 - Track a group of users' submission on UVA
 - Track specific problem (the problem number is displayed in blue)
 - Track other problem (the problem number is displayed in red)
+- Sorted by Total > EE
 
 #### Demo
 ```
@@ -35,3 +36,8 @@ Required file - pNumberList.txt (each line one problem number)
 $ python problemNumber2detail.py
 ```
 questionDetails.json will be created
+### Header sorting
+In Web/main.js, this method determines the order of headers
+```
+compare: function (a, b)
+```
