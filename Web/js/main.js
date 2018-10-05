@@ -55,18 +55,18 @@ new Vue({
                 } else {
                     var pid = this.pNumDict[key].pid
                     var extra = this.studentData[header]['extra'][pid]
-                    
+
                     if (extra && extra.success > 0) {
                         if (isTips) {
                             return '<div>Total submission: ' + (extra.fail + extra.success) + '<br />Success: ' + extra.success + '<br />Fail: ' + extra.fail + '</div>'
                         }
                         return '<div class="blue white--text subheading text-xs-center">O</div>'
-                    }else if (extra && extra.success == 0) {
+                    } else if (extra && extra.success == 0) {
                         if (isTips) {
                             return '<div>Total submission: ' + (extra.fail + extra.success) + '<br />Success: ' + extra.success + '<br />Fail: ' + extra.fail + '</div>'
                         }
                         return '<div class="green white--text subheading text-xs-center">X</div>'
-                    }else {
+                    } else {
                         if (isTips) {
                             return '<div>No submission</div>'
                         }
@@ -79,9 +79,9 @@ new Vue({
         compare: function (a, b) {
             if (this.studentData[a].totalSolvedQ > this.studentData[b].totalSolvedQ) {
                 return -1
-            }else if (this.studentData[a].totalSolvedQ < this.studentData[b].totalSolvedQ) {
+            } else if (this.studentData[a].totalSolvedQ < this.studentData[b].totalSolvedQ) {
                 return 1
-            }else {
+            } else {
                 return this.studentData[a].solvedQ < this.studentData[b].solvedQ
             }
         }
@@ -102,7 +102,7 @@ new Vue({
                     'number': item.number
                 }
             })
-        }).then(function() {
+        }).then(function () {
             callback = 0;
             nameList = []
             extraPidList = {}
@@ -156,7 +156,7 @@ new Vue({
                                             success: 0
                                         }
                                     }
-                                }else {
+                                } else {
                                     if (s[6] != -1) {
                                         extra[s[1]].success++;
                                     } else {
@@ -164,7 +164,7 @@ new Vue({
                                     }
                                 }
                             }
-    
+
                             if (s[6] != -1 && !temp[s[1]]) {
                                 totalSolvedQ++
                                 temp[s[1]] = 'O'
@@ -175,8 +175,8 @@ new Vue({
                         dict['solvedQ'] = solvedQ
                         dict['totalSolvedQ'] = totalSolvedQ
                         main.studentData[json.uname] = dict
-                    }).catch(function() {
-                    }).then( function() {
+                    }).catch(function () {
+                    }).then(function () {
                         callback++;
                         if (callback == userIdJson.length) {
                             nameList.sort(main.compare)
